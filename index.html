@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROUND UP FITNESS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font and general body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+            scroll-behavior: smooth; /* Smooth scrolling for nav links */
+        }
+
+        /* Hero section background image */
+        #home {
+            /* Using the uploaded heroImage.jpg as background */
+            background-image: url('GUF.jpg');
+            background-size: contain;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Overlay for the hero section to make text more readable */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+        }
+
+        /* Ensure hero content is above the overlay */
+        #home > * {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Custom styling for active navigation link */
+        .nav-link.active {
+            color: #38b2ac; /* Teal color for active link */
+            font-weight: bold;
+        }
+
+        /* Basic hover effects for buttons */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Pricing card hover effect */
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* General section padding */
+        section {
+            padding: 4rem 1rem;
+        }
+
+        /* Responsive adjustments for sections */
+        @media (min-width: 768px) {
+            section {
+                padding: 6rem 2rem;
+            }
+        }
+
+        /* Adjustments for larger screens */
+        @media (min-width: 1024px) {
+            section {
+                padding: 8rem 4rem;
+            }
+        }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #2d3748; /* Darker gray for modal */
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            width: 500px;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-gray-900 shadow-lg fixed top-0 left-0 w-full z-50 rounded-b-xl">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center flex-wrap">
+            <!-- Replaced 'GYM' text with GUF.jpg image as logo -->
+            <a href="#" class="flex items-center">
+                <img src="GUF.jpg" alt="Ground Up Fitness Logo" class="h-12 md:h-16 w-auto"> <!-- Adjusted size with h-12 and md:h-16 -->
+            </a>
+            <div class="block lg:hidden">
+                <button id="menu-button" class="text-gray-400 hover:text-white focus:outline-none focus:text-white">
+                    <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 5h16a1 1 0 010 2H4a1 1 0 110-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2zm0 6h16a1 1 0 010 2H4a1 1 0 010-2z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="nav-menu" class="hidden w-full lg:flex lg:items-center lg:w-auto mt-4 lg:mt-0">
+                <ul class="flex flex-col lg:flex-row lg:space-x-8 space-y-4 lg:space-y-0 w-full lg:w-auto text-center">
+                    <li><a href="#home" class="nav-link text-lg font-medium text-gray-300 hover:text-white transition duration-300 py-2 px-3 rounded-md">Home</a></li>
+                    <li><a href="#services" class="nav-link text-lg font-medium text-gray-300 hover:text-white transition duration-300 py-2 px-3 rounded-md">Services</a></li>
+                    <li><a href="#about" class="nav-link text-lg font-medium text-gray-300 hover:text-white transition duration-300 py-2 px-3 rounded-md">About Us</a></li>
+                    <li><a href="#pricing" class="nav-link text-lg font-medium text-gray-300 hover:text-white transition duration-300 py-2 px-3 rounded-md">Pricing</a></li>
+                    <li><a href="#reviews" class="nav-link text-lg font-medium text-gray-300 hover:text-white transition duration-300 py-2 px-3 rounded-md">Reviews</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="flex flex-col items-center justify-center text-white py-20 px-4">
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 animate-pulse">Achieve Your Fitness Goals!</h1>
+        <p class="text-xl md:text-2xl lg:text-3xl mb-8 max-w-3xl leading-relaxed">
+            Welcome to our state-of-the-art gym, where we help you transform your body and mind.
+        </p>
+        
+        
+        <!-- Changed href to call JavaScript function -->
+        <a href="#" id="home-join-now" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+            Join Now!
+        </a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-gray-800 py-20 px-4 rounded-xl shadow-xl mx-4 my-8">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-teal-400 mb-12">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1: Physical Fitness (Using image4.jpg for general fitness) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="image4.jpg" alt="Physical Fitness" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Physical Fitness</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Comprehensive fitness programs tailored to improve your overall physical health and well-being.
+                    </p>
+                </div>
+                <!-- Service Card 2: Weight Gain (Using image1.jpg for bench press) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="image1.jpg" alt="Weight Gain" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Weight Gain</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Structured plans and nutritional guidance to help you gain healthy weight and muscle mass effectively.
+                    </p>
+                </div>
+                <!-- Service Card 3: Strength Training (Using image2.jpg for rowing) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="image2.jpg" alt="Strength Training" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Strength Training</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Expert-led strength training sessions to build power, endurance, and define your physique.
+                    </p>
+                </div>
+                <!-- Service Card 4: Fat Loss (Using image3.jpg for battle ropes) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="image3.jpg" alt="Fat Loss" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Fat Loss</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Effective strategies and workouts designed to help you shed unwanted fat and achieve a leaner body.
+                    </p>
+                </div>
+                <!-- Service Card 5: Weightlifting (Using image5.jpg for deadlift) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="image5.jpg" alt="Weightlifting" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Weightlifting</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Professional guidance for proper weightlifting techniques, preventing injuries, and maximizing gains.
+                    </p>
+                </div>
+                <!-- Service Card 6: Running (Using about.jpg for treadmill) -->
+                <div class="bg-gray-700 p-8 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:bg-gray-600">
+                    <img src="about.jpg" alt="Running" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-3xl font-semibold text-white mb-4">Running</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Improve your running performance, endurance, and technique with our specialized training programs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="bg-gray-900 py-20 px-4 rounded-xl shadow-xl mx-4 my-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-teal-400 mb-12">Why Choose Us?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+                <!-- Reason 1: Expert Trainers -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="1.jpg" alt="Expert Trainers" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Expert Trainers</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Our certified trainers are dedicated to guiding you through every step of your fitness journey, providing personalized attention and motivation.
+                    </p>
+                </div>
+                <!-- Reason 2: State-of-the-Art Equipment -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="state of the art equipment.jpg" alt="State-of-the-Art Equipment" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">State-of-the-Art Equipment</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        We offer a wide range of modern and well-maintained equipment to ensure you have everything you need for an effective workout.
+                    </p>
+                </div>
+                <!-- Reason 3: Supportive Community -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="supportive community.jpg" alt="Supportive Community" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Supportive Community</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Join a vibrant community of fitness enthusiasts who will inspire and support you to reach your maximum potential.
+                    </p>
+                </div>
+                <!-- Reason 4: Flexible Membership Options -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="FMO.jpg" alt="Flexible Membership Options" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Flexible Membership Options</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        We offer a variety of membership plans designed to fit your budget and lifestyle, from basic access to premium packages.
+                    </p>
+                </div>
+                <!-- Reason 5: Holistic Approach -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="Holistic Approach.jpg" alt="Holistic Approach" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Holistic Approach</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Beyond just workouts, we focus on nutrition, mindfulness, and overall well-being to ensure a balanced and healthy lifestyle.
+                    </p>
+                </div>
+                <!-- Reason 6: Clean and Safe Environment -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="Clean & Safe.jpg" alt="Clean and Safe Environment" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-2xl font-semibold text-white mb-4">Clean and Safe Environment</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Your health and safety are our top priorities. We maintain a clean, hygienic, and secure facility for all our members.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="bg-gray-800 py-20 px-4 rounded-xl shadow-xl mx-4 my-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-teal-400 mb-12">Our Flexible Pricing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Basic Plan -->
+                <div class="pricing-card bg-gray-700 p-8 rounded-xl shadow-lg flex flex-col justify-between transform transition duration-300 hover:scale-105 border-2 border-transparent hover:border-teal-500">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-4">Basic Plan</h3>
+                        <p class="text-5xl font-extrabold text-teal-400 mb-6">$29<span class="text-xl text-gray-300">/month</span></p>
+                        <ul class="text-gray-300 text-lg mb-8 space-y-3 text-left">
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Access to Gym Floor</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Locker Room Access</li>
+                            <li class="flex items-center opacity-50"><svg class="w-6 h-6 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>No Personal Trainer</li>
+                            <li class="flex items-center opacity-50"><svg class="w-6 h-6 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>No Group Classes</li>
+                        </ul>
+                    </div>
+                    <!-- Added class `open-modal-btn` to all "Join Now" buttons -->
+                    <a href="#" class="btn-primary bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 block text-center open-modal-btn">Join Now</a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card bg-gray-700 p-8 rounded-xl shadow-lg flex flex-col justify-between transform transition duration-300 hover:scale-105 border-2 border-transparent hover:border-teal-500">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-4">Pro Plan</h3>
+                        <p class="text-5xl font-extrabold text-teal-400 mb-6">$49<span class="text-xl text-gray-300">/month</span></p>
+                        <ul class="text-gray-300 text-lg mb-8 space-y-3 text-left">
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>All Basic Features</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Unlimited Group Classes</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Diet Plan Consultation</li>
+                            <li class="flex items-center opacity-50"><svg class="w-6 h-6 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>No Personal Training</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 block text-center open-modal-btn">Join Now</a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card bg-gray-700 p-8 rounded-xl shadow-lg flex flex-col justify-between transform transition duration-300 hover:scale-105 border-2 border-transparent hover:border-teal-500">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-4">Premium Plan</h3>
+                        <p class="text-5xl font-extrabold text-teal-400 mb-6">$79<span class="text-xl text-gray-300">/month</span></p>
+                        <ul class="text-gray-300 text-lg mb-8 space-y-3 text-left">
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>All Pro Features</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Personal Training (2 sessions/month)</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Nutritional Counseling</li>
+                            <li class="flex items-center"><svg class="w-6 h-6 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>Guest Passes (2/month)</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn-primary bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 block text-center open-modal-btn">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="bg-gray-900 py-20 px-4 rounded-xl shadow-xl mx-4 my-8">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-teal-400 mb-12">What Our Members Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Review 1 (Using 1.jpg) -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="1.jpg" alt="User 1" class="w-24 h-24 rounded-full mb-4 object-cover border-4 border-teal-500">
+                    <p class="text-gray-300 italic text-lg mb-4">"Joining this gym was the best decision I made for my health. The trainers are amazing and the facilities are top-notch!"</p>
+                    <p class="font-semibold text-white">- Jane Doe</p>
+                </div>
+                <!-- Review 2 (Using 2.jpg) -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="2.jpg" alt="User 2" class="w-24 h-24 rounded-full mb-4 object-cover border-4 border-teal-500">
+                    <p class="text-gray-300 italic text-lg mb-4">"I've seen incredible results thanks to their personalized weight gain program. Highly recommend this gym to everyone!"</p>
+                    <p class="font-semibold text-white">- John Smith</p>
+                </div>
+                 <!-- Review 3 (Using 3.jpg) -->
+                 <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="3.jpg" alt="User 3" class="w-24 h-24 rounded-full mb-4 object-cover border-4 border-teal-500">
+                    <p class="text-gray-300 italic text-lg mb-4">"The atmosphere here is so motivating. I love the group classes and the supportive community."</p>
+                    <p class="font-semibold text-white">- Emily White</p>
+                </div>
+                <!-- Review 4 (Kept placeholder as only 3 user images provided) -->
+                <div class="bg-gray-800 p-8 rounded-lg shadow-lg flex flex-col items-center transform transition duration-300 hover:scale-105 hover:bg-gray-700">
+                    <img src="R4.jpg" alt="User 4" class="w-24 h-24 rounded-full mb-4 object-cover border-4 border-teal-500">
+                    <p class="text-gray-300 italic text-lg mb-4">"Finally a gym that focuses on overall well-being. The nutritional advice has been invaluable."</p>
+                    <p class="font-semibold text-white">- Michael Brown</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 text-center text-gray-400 rounded-t-xl mt-8">
+        <p>&copy; 2024 GU FITNESS. All rights reserved.</p>
+        <P>MADE BY PAWAN KUMAR</P>
+    </footer>
+
+    <!-- Registration Modal (Hidden by default) -->
+    <div id="registration-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h3 class="text-3xl font-bold text-teal-400 mb-6 text-center">Register Now!</h3>
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-300 text-sm font-bold mb-2">Full Name</label>
+                    <input type="text" id="name" name="name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 bg-gray-200" placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 bg-gray-200" placeholder="john.doe@example.com">
+                </div>
+                <div>
+                    <label for="phone" class="block text-gray-300 text-sm font-bold mb-2">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 bg-gray-200" placeholder="+1 (555) 123-4567">
+                </div>
+                <div>
+                    <label for="plan" class="block text-gray-300 text-sm font-bold mb-2">Preferred Plan</label>
+                    <select id="plan" name="plan" class="shadow border rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-teal-500 bg-gray-200">
+                        <option value="basic">Basic Plan ($29/month)</option>
+                        <option value="pro">Pro Plan ($49/month)</option>
+                        <option value="premium">Premium Plan ($79/month)</option>
+                    </select>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out transform hover:scale-105">
+                        Submit Registration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for mobile navigation menu toggle
+        const menuButton = document.getElementById('menu-button');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        menuButton.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a nav link is clicked (for smooth scrolling and mobile UX)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Smooth scroll to section
+                document.querySelector(link.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                if (!navMenu.classList.contains('hidden')) {
+                    navMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Highlight active navigation link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Adjust offset for header height
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize active link on page load for the 'home' section
+        document.addEventListener('DOMContentLoaded', () => {
+            const homeLink = document.querySelector('.nav-link[href="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+
+        // --- MODAL JAVASCRIPT ---
+        const registrationModal = document.getElementById('registration-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        // Select all "Join Now" buttons
+        const joinNowButtons = document.querySelectorAll('.open-modal-btn');
+        // Get the home section's "Join Now" button by its ID
+        const homeJoinNowButton = document.getElementById('home-join-now');
+
+
+        // Function to open the modal
+        function openModal(event) {
+            event.preventDefault(); // Prevent default link behavior (e.g., scrolling to top)
+            registrationModal.classList.remove('hidden'); // Show the modal
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            registrationModal.classList.add('hidden'); // Hide the modal
+        }
+
+        // Add event listeners to all "Join Now" buttons
+        joinNowButtons.forEach(button => {
+            button.addEventListener('click', openModal);
+        });
+
+        // Add event listener to the home section's "Join Now" button
+        if (homeJoinNowButton) { // Ensure button exists before adding listener
+            homeJoinNowButton.addEventListener('click', openModal);
+        }
+
+        // Add event listener to the close button
+        if (closeModalButton) {
+             closeModalButton.addEventListener('click', closeModal);
+        }
+
+
+        // Close modal when clicking outside of it
+        registrationModal.addEventListener('click', (event) => {
+            if (event.target === registrationModal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
